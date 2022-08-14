@@ -1,0 +1,14 @@
+.popup__input_type_name {
+  margin: 54px auto 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 570px) {
+  .popup__input_type_name {
+    margin-top: 75px;
+  }
+}

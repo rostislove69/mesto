@@ -8,15 +8,13 @@ let inputAbout = document.querySelector(".popup__input_type_about");
 let popupForm = document.querySelector(".popup__form");
 
 function open () {
-  let inputName = document.querySelector(".popup__input_type_name");
-  let inputAbout = document.querySelector(".popup__input_type_about");
-  popup.classList.add("popup_opened");
+  popup.classList.add("popup_mode_opened");
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
 }
 
 function close () {
-  popup.classList.remove("popup_opened");
+  popup.classList.remove("popup_mode_opened");
 }
 
 function formSubmitHandler (evt) {

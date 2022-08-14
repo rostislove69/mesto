@@ -1,0 +1,14 @@
+.elements__element {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 282px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  .elements__element {
+    max-width: 100%;
+  }
+}
