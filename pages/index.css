@@ -26,6 +26,7 @@
 
 /* Elements */
 @import url(../blocks/elements/elements.css);
+@import url(../blocks/elements/__grid/elements__grid.css);
 @import url(../blocks/elements/__image/elements__image.css);
 @import url(../blocks/elements/__element/elements__element.css);
 @import url(../blocks/elements/__block/elements__block.css);
@@ -46,4 +47,4 @@
 @import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_about.css);
 @import url(../blocks/popup/__button-submit/popup__button-submit.css);
-@import url(../blocks/popup/_mode/popup_mode_opened.css);
+@import url(../blocks/popup/popup_opened.css);
