@@ -4,12 +4,6 @@
   list-style-type: none;
 }
 
-@media screen and (min-width: 1281px) {
-  .elements {
-    max-width: 70%;
-  }
-}
-
 @media screen and (max-width: 936px) {
   .elements {
     margin-left: 19px;

@@ -6,12 +6,6 @@
   column-gap: 17px;
 }
 
-@media screen and (min-width: 1281px) {
-  .elements__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 @media screen and (max-width: 635px) {
   .elements__grid {
     grid-template-columns: repeat(2, 1fr);
