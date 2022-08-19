@@ -5,7 +5,7 @@
   margin-left: 18px;
   width: 24px;
   height: 24px;
-  background-color: black;
+  background-color: rgb(0, 0, 0, 0);
   border: 1px;
   border-color: #ffffff;
   border-style: solid;
@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 540px) {
   .profile__edit-button{
-    margin-left: 10px;
+    margin: 22px 0 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;

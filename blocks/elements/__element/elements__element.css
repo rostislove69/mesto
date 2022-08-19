@@ -9,6 +9,12 @@
 
 @media screen and (max-width: 500px) {
   .elements__element {
-    max-width: 100%;
+    margin: 0 auto 0;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .elements__element {
+    margin: 0;
   }
 }
