@@ -1,4 +1,11 @@
 .elements__image {
   max-width: 282px;
+  min-width: 282px;
   max-height: 282px;
+  min-height: 282px;
+  object-fit: fill;
+}
+
+.elements__image:hover {
+  cursor: pointer;
 }
