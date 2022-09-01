@@ -1,14 +1,13 @@
 .popup__button-close {
-  position: relative;
-  top: -38px;
-  left: 236px;
+  position: absolute;
+  top: -35px;
+  right: -35px;
   background-image: url(../../../images/close-button.svg);
   background-position: center;
   background-color: rgba(0, 0, 0, 0);
   border: 0;
   width: 32px;
   height: 32px;
-  z-index: 9999;
 }
 
 .popup__button-close:hover {
@@ -21,7 +20,7 @@
     background-image: url(../../../images/close-button-mobile.svg);
     background-position: center;
     background-repeat: no-repeat;
-    top: -39px;
-    left: 130px;
+    top: -40px;
+    right: -7px;
   }
 }
