@@ -4,6 +4,7 @@
   max-height: 282px;
   min-height: 282px;
   object-fit: fill;
+  color: white;
 }
 
 .elements__image:hover {

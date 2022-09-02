@@ -2,7 +2,6 @@ const body = document.querySelector(".page");
 const template = document.querySelector("#elements").content;
 const elementsGrid = document.querySelector(".elements__grid");
 const elementsName = document.querySelector(".elements__name");
-const popup = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
 const popupFullImage = document.querySelector(".popup_type_full-image");
@@ -23,117 +22,88 @@ const popupEditForm = document.querySelector(".popup__form_type_edit");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 const submitButton = document.querySelector(".popup__button-submit");
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-];
+const openPopup = (popup) =>{
+  popup.classList.add("popup_opened");
+}
+const closePopup = (popup) =>{
+  popup.classList.remove("popup_opened");
+}
 
-const newCard = (name, link) =>{
-  const templateLi = template.querySelector(".elements__element").cloneNode(true);
-  const likeButton = templateLi.querySelector(".elements__like-button");
-  const deleteButton = templateLi.querySelector(".elements__delete-button");
-  const image = templateLi.querySelector(".elements__image");
-  templateLi.querySelector(".elements__name").textContent = name;
-  templateLi.querySelector(".elements__image").alt = name;
-  templateLi.querySelector(".elements__image").src = link;
+const createNewCard = (name, link) =>{
+  const newCard = template.querySelector(".elements__element").cloneNode(true);
+  const likeButton = newCard.querySelector(".elements__like-button");
+  const deleteButton = newCard.querySelector(".elements__delete-button");
+  const cardImage = newCard.querySelector(".elements__image");
+  const cardName = newCard.querySelector(".elements__name");
+  cardName.textContent = name;
+  cardImage.alt = name;
+  cardImage.src = link;
   likeButton.addEventListener("click", function (evt){
     const eventTarget = evt.target;
     eventTarget.classList.toggle("elements__like-button_active");
   });
-  deleteButton.addEventListener("click", function (evt){
-    const eventTarget = evt.target;
-    const itemElement = eventTarget.closest(".elements__element");
-    itemElement.remove()
+  deleteButton.addEventListener("click", function (){
+    newCard.remove()
   });
-  image.addEventListener("click",function (evt){
+  cardImage.addEventListener("click",function (evt){
     const eventTarget = evt.target;
-    popupFullImage.classList.add("popup_opened");
+    openPopup(popupFullImage);
     popupImage.src = eventTarget.src;
     popupImage.alt = eventTarget.alt;
     popupImageName.textContent = eventTarget.alt;
-    if(popupFullImage.classList.contains("popup_opened")){
-      body.setAttribute("style","overflow: hidden; height: 100vh");
-      }
   });
-  return templateLi;
+  return newCard;
 }
 
-const addCards = initialCards.forEach((item) => {
-  elementsGrid.prepend(newCard(item.name,item.link));
+const addInitialCards = initialCards.forEach((item) => {
+  elementsGrid.prepend(createNewCard(item.name,item.link));
 });
 
-const openEdit = () => {
-  popupEdit.classList.add("popup_opened");
+const openEditPopup = () => {
+  openPopup(popupEdit);
   inputUserName.value = profileName.textContent;
   inputUserAbout.value = profileAbout.textContent;
 }
 
-const closeEdit = () => {
-  popupEdit.classList.remove("popup_opened");
+const closeEditPopup = () => {
+  closePopup (popupEdit);
 }
 
 const editFormSubmitHandler = (evt) => {
     evt.preventDefault();
     profileName.textContent = inputUserName.value;
     profileAbout.textContent = inputUserAbout.value;
-    closeEdit ();
+    closeEditPopup ();
 }
 
-const openAdd = () =>{
-  popupAdd.classList.add("popup_opened");
+const openAddPopup = () =>{
+  openPopup(popupAdd);
 }
 
-const closeAdd = () =>{
-  popupAdd.classList.remove("popup_opened");
+const closeAddPopup = () =>{
+  closePopup(popupAdd);
 }
 
 const addFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  const newCardElement = {
+  const newCardObject = {
     name: inputPicturesName.value,
     link: inputPicturesLink.value
   };
-  if (inputPicturesName.value !== "" && inputPicturesLink.value !== "") {
-    elementsGrid.prepend(newCard(newCardElement.name,newCardElement.link));
-  } else {
-    submitButton.setAttribute("disable", "true");
-  };
-  closeAdd ();
+  elementsGrid.prepend(createNewCard(newCardObject.name,newCardObject.link));
+  closeAddPopup ();
   inputPicturesLink.value = "";
   inputPicturesName.value = "";
 }
 
-const closeFullImage = () => {
-  popupFullImage.classList.remove("popup_opened");
-  body.removeAttribute("style","true");
+const closeImagePopup = () => {
+  closePopup(popupFullImage);
 };
 
-editButton.addEventListener("click", openEdit);
-closeEditButton.addEventListener("click", closeEdit);
+editButton.addEventListener("click", openEditPopup);
+closeEditButton.addEventListener("click", closeEditPopup);
 popupEditForm.addEventListener("submit", editFormSubmitHandler);
-addButton.addEventListener("click", openAdd);
-closeAddButton.addEventListener("click", closeAdd);
+addButton.addEventListener("click", openAddPopup);
+closeAddButton.addEventListener("click", closeAddPopup);
 popupAddForm.addEventListener("submit", addFormSubmitHandler);
-closeFullImagePopup.addEventListener("click", closeFullImage);
+closeFullImagePopup.addEventListener("click", closeImagePopup);
