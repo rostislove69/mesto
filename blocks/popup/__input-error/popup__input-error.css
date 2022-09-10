@@ -10,6 +10,8 @@
   max-width: 358px;
   justify-items: flex-start;
   align-items: flex-start;
+  min-height: 30px;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 570px) {
