@@ -1,4 +1,8 @@
-const template = document.querySelector("#elements").content;
+import {Card} from "./Card.js";
+import {initialCards} from "./cards.js";
+import {FormValidator} from "./FormValidator.js";
+import {validationConfig} from "./validationCfg.js";
+
 const elementsGrid = document.querySelector(".elements__grid");
 const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
@@ -8,8 +12,6 @@ const popupImage = document.querySelector(".popup__image");
 const popupImageName = document.querySelector(".popup__image-name");
 const buttonEdit = document.querySelector(".profile__edit-button");
 const buttonAdd = document.querySelector(".profile__add-button");
-const buttonSubmitAdd = document.querySelector(".button-submit-add");
-const buttonSubmitEdit = document.querySelector(".button-submit-edit");
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about");
 const inputUserName = document.querySelector(".popup__input_type_user-name");
@@ -21,6 +23,27 @@ const inputs = document.querySelectorAll(".popup__input");
 const popupEditForm = document.querySelector(".popup__form_type_edit");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 
+const formEditValidator = new FormValidator(validationConfig, popupEditForm);
+const formAddValidator = new FormValidator(validationConfig, popupAddForm);
+
+formEditValidator.enableValidation();
+formAddValidator.enableValidation();
+
+function createNewCard(item) {
+  return new Card (item, "#elements", openFullImage).generateCard();
+}
+
+initialCards.forEach((item) => {
+  elementsGrid.prepend(createNewCard(item));
+})
+
+function openFullImage (name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupImageName.textContent = name;
+  openPopup(popupFullImage);
+}
+
 const openPopup = (popup) =>{
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", pressEsc);
@@ -30,36 +53,6 @@ const closePopup = (popup) =>{
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", pressEsc);
 };
-
-const createNewCard = (name, link) =>{
-  const newCard = template.querySelector(".elements__element").cloneNode(true);
-  const likeButton = newCard.querySelector(".elements__like-button");
-  const deleteButton = newCard.querySelector(".elements__delete-button");
-  const cardImage = newCard.querySelector(".elements__image");
-  const cardName = newCard.querySelector(".elements__name");
-  cardName.textContent = name;
-  cardImage.alt = name;
-  cardImage.src = link;
-  likeButton.addEventListener("click", function (evt){
-    const eventTarget = evt.target;
-    eventTarget.classList.toggle("elements__like-button_active");
-  });
-  deleteButton.addEventListener("click", function (){
-    newCard.remove()
-  });
-  cardImage.addEventListener("click",function (evt){
-    const eventTarget = evt.target;
-    openPopup(popupFullImage);
-    popupImage.src = eventTarget.src;
-    popupImage.alt = eventTarget.alt;
-    popupImageName.textContent = eventTarget.alt;
-  });
-  return newCard;
-};
-
-const addInitialCards = initialCards.forEach((item) => {
-  elementsGrid.prepend(createNewCard(item.name,item.link));
-});
 
 const openEditPopup = () => {
   openPopup(popupEdit);
@@ -72,7 +65,7 @@ const openEditPopup = () => {
   inputs.forEach((inputEl) => {
     inputEl.classList.remove("popup__input_type_error")
   })
-  enableSubmitButton(buttonSubmitEdit, "popup__button-submit_inactive");
+  formEditValidator.enableSubmitButton();
 };
 
 const handleProfileFormSubmit = (evt) => {
@@ -92,19 +85,19 @@ const openAddPopup = () => {
   inputs.forEach((inputEl) => {
     inputEl.classList.remove("popup__input_type_error");
   });
-  disableSubmitButton(buttonSubmitAdd, "popup__button-submit_inactive");
+  formAddValidator.disableSubmitButton();
 };
 
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
   if (inputPicturesName.value !== "" && inputPicturesLink.value !== "") {
     const newCardObject = {name: inputPicturesName.value, link: inputPicturesLink.value};
-    elementsGrid.prepend(createNewCard(newCardObject.name,newCardObject.link));
+    elementsGrid.prepend(createNewCard(newCardObject));
     closePopup(popupAdd);
     popupAddForm.reset();
-    enableSubmitButton(buttonSubmitAdd,"popup__button-submit_inactive");
+    formAddValidator.enableSubmitButton();
   } else {
-    disableSubmitButton(buttonSubmitAdd,"popup__button-submit_inactive");
+    formAddValidator.disableSubmitButton();
   }
 };
 
