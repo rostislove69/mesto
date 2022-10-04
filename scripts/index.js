@@ -90,18 +90,14 @@ const openAddPopup = () => {
 
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  if (inputPicturesName.value !== "" && inputPicturesLink.value !== "") {
-    const newCardObject = {name: inputPicturesName.value, link: inputPicturesLink.value};
-    elementsGrid.prepend(createNewCard(newCardObject));
-    closePopup(popupAdd);
-    popupAddForm.reset();
-    formAddValidator.enableSubmitButton();
-  } else {
-    formAddValidator.disableSubmitButton();
-  }
+  const newCardObject = {name: inputPicturesName.value, link: inputPicturesLink.value};
+  elementsGrid.prepend(createNewCard(newCardObject));
+  closePopup(popupAdd);
+  popupAddForm.reset();
+  formAddValidator.enableSubmitButton();
 };
 
-Array.from(popups).forEach(popup => {
+popups.forEach(popup => {
   popup.addEventListener("click", evt => {
     if(evt.target.classList.contains("popup") || evt.target.classList.contains("popup__button-close")){
       closePopup(popup);
