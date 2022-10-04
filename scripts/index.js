@@ -59,11 +59,10 @@ const openEditPopup = () => {
   inputUserName.value = profileName.textContent;
   inputUserAbout.value = profileAbout.textContent;
   inputErrors.forEach((inputErrorEl) => {
-    inputErrorEl.classList.remove("popup__input-error_active");
-    inputErrorEl.textContent = "";
+    formEditValidator.clearEditErrors(inputErrorEl);
   })
   inputs.forEach((inputEl) => {
-    inputEl.classList.remove("popup__input_type_error")
+    formEditValidator.clearEntryField(inputEl);
   })
   formEditValidator.enableSubmitButton();
 };
