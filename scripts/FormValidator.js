@@ -44,14 +44,17 @@ export class FormValidator {
     errorElement.textContent = "";
   }
 
-  clearEditErrors(inputErrorEl){
-    inputErrorEl.classList.remove(this._cfg.errorClassActive);
-    inputErrorEl.textContent = "";
-  }
-
-  clearEntryField(inputEl){
-    inputEl.classList.remove(this._cfg.inputErrorClass);
-  }
+  resetValidation(){ 
+    this._inputErrorList = this._formEl.querySelectorAll(this._cfg.errorClass);
+    this._inputList = this._formEl.querySelectorAll(this._cfg.inputSelector);
+    this._inputErrorList.forEach(inputErrorEl => { 
+       inputErrorEl.classList.remove(this._cfg.errorClassActive); 
+       inputErrorEl.textContent = ""; 
+     });
+    this._inputList.forEach(inputEl => { 
+       inputEl.classList.remove(this._cfg.inputErrorClass) ;
+     });
+   }
 
   _checkInputValidity(inputElement){
     if (!inputElement.validity.valid) {

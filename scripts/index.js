@@ -18,8 +18,6 @@ const inputUserName = document.querySelector(".popup__input_type_user-name");
 const inputUserAbout = document.querySelector(".popup__input_type_user-about");
 const inputPicturesName = document.querySelector(".popup__input_type_pictures-name");
 const inputPicturesLink = document.querySelector(".popup__input_type_pictures-link");
-const inputErrors = document.querySelectorAll(".popup__input-error");
-const inputs = document.querySelectorAll(".popup__input");
 const popupEditForm = document.querySelector(".popup__form_type_edit");
 const popupAddForm = document.querySelector(".popup__form_type_add");
 
@@ -58,12 +56,7 @@ const openEditPopup = () => {
   openPopup(popupEdit);
   inputUserName.value = profileName.textContent;
   inputUserAbout.value = profileAbout.textContent;
-  inputErrors.forEach((inputErrorEl) => {
-    formEditValidator.clearEditErrors(inputErrorEl);
-  })
-  inputs.forEach((inputEl) => {
-    formEditValidator.clearEntryField(inputEl);
-  })
+  formEditValidator.resetValidation();
   formEditValidator.enableSubmitButton();
 };
 
@@ -77,13 +70,7 @@ const handleProfileFormSubmit = (evt) => {
 const openAddPopup = () => {
   openPopup(popupAdd);
   popupAddForm.reset();
-  inputErrors.forEach((inputErrorEl) => {
-    inputErrorEl.classList.remove("popup__input-error_active");
-    inputErrorEl.textContent = "";
-  });
-  inputs.forEach((inputEl) => {
-    inputEl.classList.remove("popup__input_type_error");
-  });
+  formAddValidator.resetValidation();
   formAddValidator.disableSubmitButton();
 };
 
