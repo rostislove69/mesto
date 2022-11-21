@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
 
   constructor(cfg, formEl){
     this._cfg = cfg;
@@ -45,8 +45,8 @@ export class FormValidator {
   }
 
   resetValidation(){ 
-    this._inputErrorList = this._formEl.querySelectorAll(this._cfg.errorClass);
-    this._inputList = this._formEl.querySelectorAll(this._cfg.inputSelector);
+    this._inputErrorList = Array.from(this._formEl.querySelectorAll(this._cfg.errorClass));
+    this._inputList = Array.from(this._formEl.querySelectorAll(this._cfg.inputSelector));
     this._inputErrorList.forEach(inputErrorEl => { 
        inputErrorEl.classList.remove(this._cfg.errorClassActive); 
        inputErrorEl.textContent = ""; 
