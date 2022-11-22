@@ -1,10 +1,11 @@
 import "./index.css";
-import Card from "../components/card.js"
-import FormValidator from "../components/formValidator.js";
-import Section from "../components/section.js";
-import PopupWithForm from "../components/popupWithForm.js";
-import PopupWithImage from "../components/popupwithimage.js";
-import UserInfo from "../components/userInfo.js";
+import Card from "../components/Card.js"
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/Popupwithimage.js";
+import UserInfo from "../components/UserInfo.js";
 import {initialCards} from "../utils/initialCards.js";
 import {validationConfig} from "../utils/validationCfg.js";
 import {
@@ -71,6 +72,7 @@ buttonEdit.addEventListener("click", () => {
   profileEditPopup.open();
   formEditValidator.resetValidation();
   formEditValidator.enableSubmitButton();
-  inputUserName.value = userInformation.getUserInfo().name;
-  inputUserAbout.value = userInformation.getUserInfo().about;
+  const {name, about} = userInformation.getUserInfo();
+  inputUserName.value = name;
+  inputUserAbout.value = about;
 })

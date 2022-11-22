@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/rostislove69/mesto#readme",
   "dependencies": {
-    "core-js": "^3.26.1",
-    "webpack": "^5.75.0"
+    "core-js": "^3.26.1"
   },
   "devDependencies": {
+    "webpack": "^5.75.0",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "autoprefixer": "^10.4.13",

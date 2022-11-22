@@ -8,12 +8,12 @@
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src='<%=require("../images/MestoLogo.svg")%>' alt="Логотип проекта Mesto">
+    <img class="header__logo" src='<%=require("./images/MestoLogo.svg")%>' alt="Логотип проекта Mesto">
   </header>
   <main>
     <section class="profile">
       <div class="profile__two-columns">
-        <img class="profile__avatar" src='<%=require("../images/avatar.jpg")%>' alt="Фото профиля">
+        <img class="profile__avatar" src='<%=require("./images/avatar.jpg")%>' alt="Фото профиля">
         <div class="profile__info">
           <div class="profile__row">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -48,11 +48,11 @@
         <button class="popup__button-close popup__button-close_type_edit" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <label class="popup__field">
-          <input class="popup__input popup__input_type_user-name" id="user-name-input" type="text" value="Жак-Ив Кусто" placeholder="Имя" name="user-name" required minlength="2" maxlength="40">
+          <input class="popup__input popup__input_type_user-name" id="user-name-input" type="text" value="Жак-Ив Кусто" placeholder="Имя" name="name" required minlength="2" maxlength="40">
           <span class="popup__input-error user-name-input-error"></span>
         </label>
         <label class="popup__field">
-          <input class="popup__input popup__input_type_user-about" id="user-about-input" type="text" value="Исследователь океана" placeholder="О себе" name="user-about" required minlength="2" maxlength="200">
+          <input class="popup__input popup__input_type_user-about" id="user-about-input" type="text" value="Исследователь океана" placeholder="О себе" name="about" required minlength="2" maxlength="200">
           <span class="popup__input-error user-about-input-error"></span>
         </label>
         <button class="popup__button-submit button-submit-edit" type="submit">Сохранить</button>
