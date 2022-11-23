@@ -1,5 +1,5 @@
 import "./index.css";
-import Card from "../components/Card.js"
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
@@ -15,7 +15,7 @@ import {
   inputUserAbout,
   popupEditForm,
   popupAddForm
-} from "../utils/constants.js"
+} from "../utils/constants.js";
 
 const formEditValidator = new FormValidator(validationConfig, popupEditForm);
 const formAddValidator = new FormValidator(validationConfig, popupAddForm);
@@ -29,7 +29,7 @@ fullImagePopup.setEventListeners();
 
 function createNewCard(item) {
   return new Card ({name: item.name, link: item.link}, "#elements", handleCardClick).generateCard();
-}
+};
 
 const cardList = new Section ({renderer: (item) => {
   const cardElement = createNewCard(item);
@@ -75,4 +75,4 @@ buttonEdit.addEventListener("click", () => {
   const {name, about} = userInformation.getUserInfo();
   inputUserName.value = name;
   inputUserAbout.value = about;
-})
+});
