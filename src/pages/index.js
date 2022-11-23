@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from "../components/Popupwithimage.js";
+import PopupWithImage from "../components/PopupwithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import {initialCards} from "../utils/initialCards.js";
 import {validationConfig} from "../utils/validationCfg.js";
