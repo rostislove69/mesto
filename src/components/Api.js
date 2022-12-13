@@ -4,6 +4,14 @@ export default class Api {
     this._token = options.token;
   }
 
+  _checkResponse(res){
+    if(res.ok){
+      return res.json();
+    } else {
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    }
+  }
+
   getUserInformation(){
     return fetch(`${this._url}/users/me`,{
       headers: {
@@ -11,13 +19,7 @@ export default class Api {
         "Content-Type" : "application/json"
       }
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   getInitialCards(){
@@ -27,13 +29,7 @@ export default class Api {
         "Content-Type" : "application/json"
       }
     })
-    .then((res) => {
-      if (res.ok){
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
   
   updateUserInfo(data){
@@ -48,13 +44,7 @@ export default class Api {
         about: data.about
       })
     }) 
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   addNewCard(data){
@@ -69,13 +59,7 @@ export default class Api {
         link: data.link
       })
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   deleteCard(id){
@@ -86,13 +70,7 @@ export default class Api {
         "Content-Type" : "application/json"
       }
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   addLike(id){
@@ -103,13 +81,7 @@ export default class Api {
         "Content-Type" : "application/json"
       }
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   deleteLike(id){
@@ -120,13 +92,7 @@ export default class Api {
         "Content-Type" : "application/json"
       }
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 
   updateAvatar(data){
@@ -140,12 +106,6 @@ export default class Api {
         avatar: data.link
       })
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => this._checkResponse(res));
   }
 }

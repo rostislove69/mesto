@@ -34,8 +34,7 @@ export default class Card {
   }
 
   _setLikes(){
-    const likeCountEl = this._element.querySelector(".elements__like-counter");
-    likeCountEl.textContent = this._likes.length;
+    this._likeCountEl.textContent = this._likes.length;
     if(this.isLiked()){
       this._buttonLike.classList.add("elements__like-button_active");
     } else {
@@ -48,10 +47,31 @@ export default class Card {
     return userHasLikedCard
   }
 
-  _setEventListener(){
-    this._buttonLike = this._element.querySelector(".elements__like-button");
-    this._buttonDelete = this._element.querySelector(".elements__delete-button");
+  checkLikeButton(card){
+    card = this._element;
+    const buttonLikeActive = this._buttonLike.classList.contains("elements__like-button_active");
+    return buttonLikeActive;
+  }
+
+  addLike(card, likes){
+    card = this._element;
+    this._buttonLike.classList.add("elements__like-button_active");
+    this._likeCountEl.textContent = likes.length;
+  };
   
+  deleteLike(card, likes){
+    card = this._element;
+    this._buttonLike.classList.remove("elements__like-button_active");
+    this._likeCountEl.textContent = likes.length;
+  };
+
+  deleteCard(card){
+    card = this._element;
+    card.remove();
+    card = null;
+  }
+
+  _setEventListener(){
     this._buttonLike.addEventListener("click", () => {
       this._handleLikeClick(this._id);
     });
@@ -67,8 +87,10 @@ export default class Card {
 
   generateCard(){
     this._element = this._getTemplate();
-    this._buttonDelete = this._element.querySelector(".elements__delete-button");
     this._image = this._element.querySelector(".elements__image");
+    this._buttonLike = this._element.querySelector(".elements__like-button");
+    this._buttonDelete = this._element.querySelector(".elements__delete-button");
+    this._likeCountEl = this._element.querySelector(".elements__like-counter");
     this._image.alt = this._name;
     this._element.querySelector(".elements__name").textContent = this._name;
     this._image.src = this._link;

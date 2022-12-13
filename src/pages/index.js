@@ -24,18 +24,11 @@ let userId;
 
 const api = new Api(apiCfg);
 
-api.getUserInformation()
-  .then((res) => {
-    userInformation.setUserInfo(res);
-    userId = res._id;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-
-api.getInitialCards()
-  .then((res) => {
-    cardList.renderItems(res);
+Promise.all([api.getUserInformation(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInformation.setUserInfo(userData);
+    userId = userData._id;
+    cardList.renderItems(cards);
   })
   .catch((err) => {
     console.log(err);
@@ -70,43 +63,36 @@ const createNewCard = (data) => {
       api.deleteCard(id)
         .then((res) => {
           deletePopup.close();
-          deleteCard(card);
-        })
+          card.deleteCard(card);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     })
   },
   (id) => {
-    if (card.querySelector(".elements__like-button").classList.contains("elements__like-button_active") === true) {
+    if (card.checkLikeButton(card) === true) {
       api.deleteLike(id)
         .then((res) => {
-          deleteLike(card, res.likes);
+          card.deleteLike(card, res.likes);
+        })
+        .catch((err) => {
+          console.log(err);
         })
     } else {
       api.addLike(id)
         .then((res) => {
-          addLike(card, res.likes);
+          card.addLike(card, res.likes);
+      }).catch((err) => {
+        console.log(err);
       })
     }
-    }).generateCard();
-  return card;
+    })
+  return card.generateCard();
 };
 
 function handleCardClick(name, link) {
   fullImagePopup.open(name, link);
-};
-
-function deleteCard(card){
-  card.remove();
-  card = null;
-};
-
-function addLike(card, likes){
-  card.querySelector(".elements__like-button").classList.add("elements__like-button_active");
-  card.querySelector(".elements__like-counter").textContent = likes.length;
-};
-
-function deleteLike(card, likes){
-  card.querySelector(".elements__like-button").classList.remove("elements__like-button_active");
-  card.querySelector(".elements__like-counter").textContent = likes.length;
 };
 
 const cardList = new Section ({renderer: (item) => {
